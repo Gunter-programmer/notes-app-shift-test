@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "NotesApp"
 include(":app")
- 
+include(":feature:note")
+include(":component:theme")
+include(":shared:note")
+include(":feature:detail")

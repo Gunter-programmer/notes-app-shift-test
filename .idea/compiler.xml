@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="NotesApp.core.common" target="21" />
+      <module name="NotesApp.core.ui" target="21" />
+      <module name="NotesApp.feature.details" target="21" />
+      <module name="NotesApp.feature.note-details" target="21" />
+      <module name="NotesApp.note-details" target="21" />
+      <module name="NotesApp.shared.notes" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
