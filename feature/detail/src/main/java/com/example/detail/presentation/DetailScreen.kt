@@ -22,6 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.detail.R
+import androidx.compose.material3.Button
+import androidx.compose.ui.Alignment
 
 @Composable
 fun DetailsScreen(
@@ -30,6 +32,7 @@ fun DetailsScreen(
     onDescriptionChange: (String) -> Unit,
     onBackClick: () -> Unit,
     onSaveClick: () -> Unit,
+    onDeleteClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -93,20 +96,15 @@ fun DetailsScreen(
                 innerTextField()
             }
         )
-    }
-}
+        if(state.noteId != null) {
+            Spacer(modifier = Modifier.weight(1f))
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-private fun NoteDetailsScreenPreview() {
-    DetailsScreen(
-        state = DetailsState(
-            title = "",
-            description = ""
-        ),
-        onTitleChange = {},
-        onDescriptionChange = {},
-        onBackClick = {},
-        onSaveClick = {},
-    )
+            Button(
+                onClick = onDeleteClick,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = "Удалить заметку")
+            }
+        }
+    }
 }

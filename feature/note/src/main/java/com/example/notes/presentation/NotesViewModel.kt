@@ -8,31 +8,28 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import com.example.notes.presentation.NotesState
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class NotesViewModel(private val observeNotesUseCase: ObserveNotesUseCase)
     : ViewModel() {
 
-    private val _state = MutableStateFlow(NotesState())
+    private val searchQuery = MutableStateFlow("")
 
-    fun onSearchQueryChange(query: String) {
-        _state.value = _state.value.copy(
-            searchQuery = query
+    val state: StateFlow<NotesState> = searchQuery.flatMapLatest {
+        query -> observeNotesUseCase(query).map {
+            notes -> NotesState(
+            searchQuery = query,
+            notes = notes.map { note ->
+                NoteUi(
+                    id = note.id,
+                    title = note.title,
+                    content = note.content,
+                )
+            }
         )
     }
-
-    val state: StateFlow<NotesState> = observeNotesUseCase("")
-        .map { notes ->
-            NotesState(
-                notes = notes.map { note ->
-                    NoteUi(
-                        id = note.id,
-                        title = note.title,
-                        content = note.content,
-                    )
-                }
-            )
         }
         .stateIn(
             scope = viewModelScope,
@@ -40,4 +37,7 @@ class NotesViewModel(private val observeNotesUseCase: ObserveNotesUseCase)
             initialValue = NotesState(),
         )
 
+    fun onSearchQueryChange(query: String) {
+        searchQuery.value = query
+    }
 }

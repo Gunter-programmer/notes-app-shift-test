@@ -2,6 +2,7 @@ package com.example.detail.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.notes.domain.DeleteNoteUseCase
 import com.example.notes.domain.GetNoteByIdUseCase
 import com.example.notes.domain.Note
 import com.example.notes.domain.SaveNoteUseCase
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(private val noteId: Long?,
     private val getNoteByIdUseCase: GetNoteByIdUseCase,
     private val saveNoteUseCase: SaveNoteUseCase,
+    private val deleteNoteUseCase: DeleteNoteUseCase
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(DetailsState(noteId = noteId))
@@ -23,6 +25,9 @@ class DetailsViewModel(private val noteId: Long?,
 
     private val _saved = MutableSharedFlow<Unit>()
     val saved: SharedFlow<Unit> = _saved.asSharedFlow()
+
+    private val _deleted = MutableSharedFlow<Unit>()
+    val deleted: SharedFlow<Unit> = _deleted.asSharedFlow()
 
     init {
         if (noteId != null) {
@@ -59,6 +64,15 @@ class DetailsViewModel(private val noteId: Long?,
 
             saveNoteUseCase(note)
             _saved.emit(Unit)
+        }
+    }
+
+    fun onDeleteClick(){
+        val id = _state.value.noteId ?: return
+
+        viewModelScope.launch {
+            deleteNoteUseCase(id)
+            _deleted.emit(Unit)
         }
     }
 

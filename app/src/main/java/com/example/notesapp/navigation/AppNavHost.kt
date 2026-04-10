@@ -39,8 +39,10 @@ fun AppNavHost(
                 noteId = null,
                 getNoteByIdUseCase = app.getNoteByIdUseCase,
                 saveNoteUseCase = app.saveNoteUseCase,
+                deleteNoteUseCase = app.deleteNoteUseCase,
                 onBackClick = navController::popBackStack,
                 onSavedClick = navController::popBackStack,
+                onDeletedClick = navController::popBackStack
             )
         }
 
@@ -53,8 +55,10 @@ fun AppNavHost(
                 noteId = noteId,
                 getNoteByIdUseCase = app.getNoteByIdUseCase,
                 saveNoteUseCase = app.saveNoteUseCase,
+                deleteNoteUseCase = app.deleteNoteUseCase,
                 onBackClick = navController::popBackStack,
                 onSavedClick = navController::popBackStack,
+                onDeletedClick = navController::popBackStack
             )
         }
     }
