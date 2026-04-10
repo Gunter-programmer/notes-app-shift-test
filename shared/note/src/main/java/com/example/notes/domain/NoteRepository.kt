@@ -1,6 +1,5 @@
 package com.example.notes.domain
 
-import com.example.notes.domain.Note
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {

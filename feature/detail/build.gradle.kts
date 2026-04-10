@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared:note"))
     //compoose
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

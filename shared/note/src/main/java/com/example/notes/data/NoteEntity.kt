@@ -12,6 +12,4 @@ data class NoteEntity(
     val content: String,
     @ColumnInfo(name = "created_at")
     val createdAt: Long,
-    @ColumnInfo(name = "updated_at")
-    val updatedAt: Long,
 )

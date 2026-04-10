@@ -2,8 +2,6 @@ package com.example.notes.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.notes.data.NoteDao
-import com.example.notes.data.NoteEntity
 
 @Database(
     entities = [NoteEntity::class],

@@ -1,6 +1,5 @@
 package com.example.notes.data
 
-import com.example.notes.data.NoteEntity
 import com.example.notes.domain.Note
 
 fun NoteEntity.toDomain(): Note = Note(
@@ -8,7 +7,6 @@ fun NoteEntity.toDomain(): Note = Note(
     title = title,
     content = content,
     createdAt = createdAt,
-    updatedAt = updatedAt,
 )
 
 fun Note.toEntity(): NoteEntity = NoteEntity(
@@ -16,5 +14,4 @@ fun Note.toEntity(): NoteEntity = NoteEntity(
     title = title,
     content = content,
     createdAt = createdAt,
-    updatedAt = updatedAt,
 )

@@ -1,8 +1,5 @@
 package com.example.notes.data
 
-import com.example.notes.data.NoteDao
-import com.example.notes.data.toDomain
-import com.example.notes.data.toEntity
 import com.example.notes.domain.Note
 import com.example.notes.domain.NoteRepository
 import kotlinx.coroutines.flow.Flow
