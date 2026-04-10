@@ -11,6 +11,7 @@ fun NotesRoute(
     modifier: Modifier = Modifier,
     viewModel: NotesViewModel = viewModel(),
     onAddNoteClick: () -> Unit = {},
+    onNoteClick: (Long) -> Unit = {},
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -18,6 +19,7 @@ fun NotesRoute(
         state = state,
         onSearchQueryChange = viewModel::onSearchQueryChange,
         onAddNoteClick = onAddNoteClick,
+        onNoteClick = onNoteClick,
         modifier = modifier,
     )
 }

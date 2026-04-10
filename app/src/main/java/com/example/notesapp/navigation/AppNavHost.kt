@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.example.detail.navigation.DetailRouter
+import com.example.detail.presentation.DetailsRoute
 import com.example.detail.presentation.DetailsRoute as DetailsScreenRoute
 import com.example.notes.list.NotesRoute
 import com.example.notes.navigation.NoteRouter
@@ -18,28 +19,20 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NoteRouter,
-        modifier = modifier,
+        startDestination = "notes"
     ) {
-        composable<NoteRouter> {
+        composable("notes") {
             NotesRoute(
                 onAddNoteClick = {
-                    navController.navigate(DetailRouter())
-                },
+                    navController.navigate("detail")
+                }
             )
         }
 
-        composable<DetailRouter> { backStackEntry ->
-            val destination = backStackEntry.toRoute<DetailRouter>()
-
-            DetailsScreenRoute(
-                noteId = destination.noteId,
-                onBackClick = {
-                    navController.popBackStack()
-                },
-                onSavedClick = {
-                    navController.popBackStack()
-                },
+        composable("detail") {
+            DetailsRoute(
+                onBackClick = navController::popBackStack,
+                onSavedClick = navController::popBackStack,
             )
         }
     }

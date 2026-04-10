@@ -28,6 +28,7 @@ fun NotesScreen(
     state: NotesState,
     onSearchQueryChange: (String) -> Unit,
     onAddNoteClick: () -> Unit,
+    onNoteClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Scaffold(
@@ -59,6 +60,7 @@ fun NotesScreen(
             } else {
                 NotesGrid(
                     notes = state.notes,
+                    onNoteClick = onNoteClick,
                     modifier = Modifier.weight(1f),
                 )
             }
@@ -81,42 +83,4 @@ private fun EmptyNotesContent(
             style = MaterialTheme.typography.bodyLarge,
         )
     }
-}
-
-@Preview(
-    showBackground = true,
-    showSystemUi = true,
-    name = "Notes screen with content",
-)
-@Composable
-private fun NotesScreenContentPreview() {
-    NotesScreen(
-        state = NotesState(
-            searchQuery = "Работа",
-            notes = listOf(
-                NoteUi(
-                    id = 1L,
-                    title = "Рабочие задачи",
-                    content = "Закончить экран заметок и подготовить архитектуру модулей.",
-                ),
-                NoteUi(
-                    id = 2L,
-                    title = "Покупки",
-                    content = "Купить молоко, хлеб, сыр и фрукты.",
-                ),
-                NoteUi(
-                    id = 3L,
-                    title = "Идея",
-                    content = "Сделать сохранение черновика при выходе с экрана редактирования.",
-                ),
-                NoteUi(
-                    id = 4L,
-                    title = "Напоминание",
-                    content = "Проверить навигацию между списком заметок и деталями.",
-                ),
-            ),
-        ),
-        onSearchQueryChange = {},
-        onAddNoteClick = {},
-    )
 }

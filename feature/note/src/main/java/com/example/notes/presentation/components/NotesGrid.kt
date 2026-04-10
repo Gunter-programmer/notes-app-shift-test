@@ -23,6 +23,7 @@ import com.example.notes.presentation.NoteUi
 @Composable
 fun NotesGrid(
     notes: List<NoteUi>,
+    onNoteClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -36,7 +37,8 @@ fun NotesGrid(
             items = notes,
             key = { it.id },
         ) { note ->
-            NoteCard(note = note)
+            NoteCard(note = note,
+                onClick = { onNoteClick(note.id) })
         }
     }
 }
@@ -45,10 +47,11 @@ fun NotesGrid(
 fun NoteCard(
     note: NoteUi,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
+    onClick: () -> Unit,
 ) {
     Card(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
             .clickable(onClick = onClick)
     ) {
         Column(
